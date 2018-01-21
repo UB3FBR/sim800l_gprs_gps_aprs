@@ -1,7 +1,7 @@
 /*Ардуино GPRS GPS APRS трекер
  * разработал Юрий UB3FBR  ub3fbr@yandex.ru 2017
  * Используйте, модифицируйте код без ограничений 
- * исходный код
+ * исходный код https://github.com/UB3FBR/sim800l_gprs_gps_aprs.git
  * тема на форуме http://infotex58.ru/forum/index.php?topic=986.msg8605#msg8605
  */
 #include <TinyGPS++.h>
