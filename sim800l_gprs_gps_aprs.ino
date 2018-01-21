@@ -90,7 +90,7 @@ void loop()
  if (intspds > 90) {Serial.println(F("=Delay=20s ="));delay(20000);}
  else if (intspds > 60){Serial.println(F("=Delay=30s ="));delay(30000);}
  else if (intspds > 30) {Serial.println(F("=Delay=40s ="));delay(40000);}
- else {Serial.println(F("=Delay=60s ="));delay(60000);} //если предыдущие условия не сработали - задержка по умолчанию 60 сек (минимальная скорость движения)
+ else {Serial.println(F("=Delay=60s ="));delay(60000);} //если предыдущие условия не сработали - задержка по умолчанию 60 сек (для минимальной скорости движения)
  } 
  
   
@@ -122,11 +122,11 @@ void sendTCPpacket()
   aprs_data+="\r";
   
   aprs_data+="UB3FBR-9>APRS,TCPIP*:="; // сначала эта строка была такой:  aprs_data+="UB3FBR-9>APRS:=";
-  aprs_data+=lla; //"5509.85"; //Latitude
-  aprs_data+=ns; //"N"; N for latitude North and S for latitude South
+  aprs_data+=lla; //"5509.85"; //Latitude Широта
+  aprs_data+=ns; //"N"; N для северной широты  и S для южной широты
   aprs_data+="/"; //Символ TABLE выбирает одну из двух таблиц символов, тут основная таблица
-  aprs_data+=llon; //"03726.17"; //Longitude
-  aprs_data+=ew; //"E"; W for longitude West and E for longitude East
+  aprs_data+=llon; //"03726.17"; //Долгота Longitude
+  aprs_data+=ew; //"E"; W западная долгота and E восточная долгота
   aprs_data+=">"; // выбор символа APRS, тут символ машины с ssid-9 такой: ">" ; Символ домашнего QTH такой: "-" ,  
   aprs_data+="APRS/GPRS tracker(SIM800L)";
   aprs_data+=" SATview=";
@@ -136,7 +136,8 @@ void sendTCPpacket()
   aprs_data+="\r";
   
  myGSM.println(aprs_data);
- //myGSM.println("UB3FBR-9>APRS,TCPIP*:>op.Yuri ub3fbr@yandex.ru"); // статусная строка
+ //myGSM.println("UB3FBR-9>APRS,TCPIP*:>op.Yuri ub3fbr@yandex.ru"); // статусная строка, можно и не выводить
+ //проверял возможность и как это работает)
  
  delay(4000);
  printSerialData();
@@ -145,9 +146,9 @@ void sendTCPpacket()
  printSerialData();
  
  Serial.println(F("=blink_led="));
- digitalWrite(12, HIGH);   // turn the LED on (HIGH is the voltage level)
- delay(1000);                       // wait for a second
- digitalWrite(12, LOW);    // turn the LED off by making the voltage LOW
+ digitalWrite(12, HIGH);   // включаем LED
+ delay(1000);              // ждем 1 секунду
+ digitalWrite(12, LOW);    // выключаем LED
   
  neo6m.listen();  
    
@@ -177,7 +178,7 @@ void myGSMsetup()
   
 do { 
   Serial.println(F("=Check registration in the network...="));
-  myGSM.println(F("AT+CREG?")); // Информация о регистрации в сети  0,1  0 – нет кода регистрации сети,1 – зарегистрирован, домашняя сеть; роуминг -  код 5
+  myGSM.println(F("AT+CREG?")); // Получаем информацию о регистрации в сети  0,1  0 – нет кода регистрации сети,1 – зарегистрирован, домашняя сеть; роуминг -  код 5
   delay (500);
 } while (!(myGSM.find("+CREG: 0,1"))or(myGSM.find("+CREG: 0,5"))); // добавил тут  логический оператор ИЛИ (or) результат Истина, если хотя бы один операнд истина
 
