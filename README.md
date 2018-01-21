@@ -33,6 +33,7 @@ uBlox
 GPRS модуль использовал SIM800L, работает неплохо, есть особенности по питанию (я запитываю от отдельного
 преобразователя DC-DC напряжением 4В)
 Данные о позиции отправляются при изменении местоположения. Следующий пакет отправляется с некоторой задержкой, которая определяется в зависимости от скорости движения (тут надо еще посмотреть, предполагаю что скорость не очень точно определяется в данном случае)
+Данный трекер работает тут https://aprs.fi/#!call=a%2FUB3FBR-9
 
 ---------------------------
 Tracker for sending location data to the APRS-IS server
@@ -67,4 +68,7 @@ when working with them you must explicitly switch to the one from which we get t
 GPRS module used SIM800L, it works well, there are special features on power supply (I feed from a separate
 converter DC-DC voltage 4V)
 Position data is sent when the location changes. The next packet is sent with some delay, which is determined depending on the speed (here it is necessary to look, I assume that the speed is not very accurately determined in this case)
+
+This tracker works here https://aprs.fi/#!call=a%2FUB3FBR-9
+
 
